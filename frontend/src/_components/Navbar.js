@@ -5,50 +5,30 @@ function Navbar() {
   return (
     // NAV CONTAINER
     <nav
-      className="h-[15vh] px-14 grid grid-cols-3 items-center text-white text-lg"
+      className="max-w-[1200px] h-[15vh] px-14 mx-auto grid grid-cols-3 items-center text-white text-lg"
       style={{ gridTemplateColumns: "1fr 2fr 1fr" }}
     >
       {/* LEFT CONTAINER */}
-      <Link
-        href="/"
-        className="flex"
-      >
-        <Image
-          src="/logo.png"
-          alt="logo"
-          width={60}
-          height={60}
-        />
-        <div className="flex flex-col justify-center leading-none">
+      <Link href="/" className="flex">
+        <Image src="/logo.png" alt="logo" width={60} height={60} />
+        <div className="text-2xl flex flex-col justify-center leading-none">
           <p>HERBAL</p>
           <p>COMPASS</p>
         </div>
       </Link>
 
       {/* MIDDLE CONTAINER */}
-      <div className="flex justify-around gap-3">
-        <Link
-          href="/herbarium"
-          className="hover:text-gray-600 hover:underline"
-        >
+      <div className="text-2xl flex justify-around gap-3">
+        <Link href="/herbarium" className="hover:text-gray-600 hover:underline">
           Herbarium
         </Link>
-        <Link
-          href="/products"
-          className="hover:text-gray-600 hover:underline"
-        >
+        <Link href="/products" className="hover:text-gray-600 hover:underline">
           Products
         </Link>
-        <Link
-          href="/about"
-          className="hover:text-gray-600 hover:underline"
-        >
+        <Link href="/about" className="hover:text-gray-600 hover:underline">
           About Us
         </Link>
-        <Link
-          href="/blog"
-          className="hover:text-gray-600 hover:underline"
-        >
+        <Link href="/blog" className="hover:text-gray-600 hover:underline">
           Blog
         </Link>
       </div>

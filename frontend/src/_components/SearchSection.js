@@ -1,4 +1,17 @@
+"use client";
+
+import SearchFieldBtn from "@/_components/SearchFieldBtn";
+
 function SearchSection() {
+  function handleInputChange(event) {
+    console.log("Input value:", event.target.value); // Hier kannst du den Input-Wert weiter verarbeiten
+  }
+
+  function handleButtonClick() {
+    console.log("Search button clicked!");
+    // Hier kannst du die Suchfunktion aufrufen
+  }
+
   return (
     // DIV WITH BG-IMAGE
     <div
@@ -30,15 +43,13 @@ function SearchSection() {
         </div>
 
         {/* SEARCH FIELD & SEARCH-BTN*/}
-        <div className="flex flex-col sm:flex-row items-center gap-4">
-          <input
-            type="text"
-            placeholder="Enter symptom (e.g. stomachache)"
-            className="max-w-2xl flex-1 p-3  text-gray-800 border border-gray-700 rounded-full"
+        <div>
+          <SearchFieldBtn
+            placeholderText="Enter symptom (e.g. stomachache)"
+            buttonText="Search"
+            onInputChange={handleInputChange}
+            onButtonClick={handleButtonClick}
           />
-          <button className=" px-6 py-3 text-white bg-green-800 border border-gray-700 rounded-full font-semibold hover:bg-green-900">
-            Search
-          </button>
         </div>
       </div>
     </div>

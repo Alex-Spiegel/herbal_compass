@@ -1,17 +1,39 @@
 function ProductCard({
-  productName,
-  brand,
-  id,
   productImage,
-  prod_description,
+  productName,
+  miniInfo,
+  productDescription,
+  price,
 }) {
   return (
-    <div className="w-96 p-4 ml-10 mb-5 border-2 border-gray-600 rounded-md">
-      <h1 className="text-2xl font-bold">Produktname:{productName}</h1>
-      <p>Brand:{brand}</p>
-      <p>ID:{id}</p>
-      <p>Produktbeschreibung:{prod_description}</p>
-      <img src={productImage} alt={id} className="h-[200px]" />
+    <div className="h-[500px] p-4 bg-lime-100 border border-black rounded-md shadow-md flex flex-col">
+      {/* Bildbereich */}
+      <div className="h-1/2 bg-white rounded-t-md overflow-hidden flex items-center justify-center">
+        <img
+          src={`/products/${productImage}`}
+          alt={productName}
+          className="h-full object-cover"
+        />
+      </div>
+      {/* card body */}
+      <div className="h-2/5 p-4 flex flex-col justify-between">
+        <div>
+          <h1 className="text-xl font-bold text-gray-800">{productName}</h1>
+          {/* mini info */}
+          <p className="text-sm text-gray-500 italic">{miniInfo}</p>
+          <p className="text-gray-700 mt-2">
+            {productDescription.slice(0, 60)}...
+          </p>
+        </div>
+        {/* card footer */}
+        <div className="mt-4 flex justify-between items-center ">
+          <button className="px-4 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700 transition duration-200">
+            Show more...
+          </button>
+          {/* price */}
+          <p className="text-lg font-semibold text-gray-800">{price} €</p>
+        </div>
+      </div>
     </div>
   );
 }
