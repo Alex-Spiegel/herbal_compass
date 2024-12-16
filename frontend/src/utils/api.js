@@ -5,4 +5,9 @@ const get_all_products = async () => {
   return result.json();
 };
 
-export { get_all_products };
+const get_all_plants = async () => {
+  const result = await fetch(`${API_URL}/api/plants`);
+  return result.json();
+};
+
+export { get_all_products, get_all_plants };

@@ -69,7 +69,7 @@ export default function Copyright() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              A Person Using a Mortar and Pestle by Yan Krukau - Pexels.com
+              A Person Using a Mortar and Pestle by Yan Krukau - Pexels
             </Link>
           </li>
         </ul>
@@ -78,10 +78,7 @@ export default function Copyright() {
       <section>
         <p className="text-gray-700">
           For more legal information, please visit our{" "}
-          <Link
-            href="/legal/terms"
-            className="text-blue-700 hover:underline"
-          >
+          <Link href="/legal/terms" className="text-blue-700 hover:underline">
             Terms of Service
           </Link>{" "}
           and{" "}
