@@ -11,4 +11,16 @@ const getAllPlants = async () => {
   return data;
 };
 
-module.exports = { getAllPlants };
+const getPlantById = async (id) => {
+  const { data, error } = await supabaseDB
+    .from("plants")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
+};
+
+module.exports = { getAllPlants, getPlantById };
