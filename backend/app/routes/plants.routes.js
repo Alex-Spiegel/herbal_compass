@@ -6,5 +6,6 @@ const plantsController = require("../controllers/plants.controller");
 // Sie delegieren die Arbeit an den Controller.
 
 router.get("/", plantsController.getAllPlants);
+router.get("/:id", plantsController.getPlantById);
 
 module.exports = router;

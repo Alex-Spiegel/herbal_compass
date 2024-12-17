@@ -6,5 +6,6 @@ const productController = require("../controllers/products.controller");
 // Sie delegieren die Arbeit an den Controller.
 
 router.get("/", productController.getAllProducts);
+router.get("/:id", productController.getProductById);
 
 module.exports = router;

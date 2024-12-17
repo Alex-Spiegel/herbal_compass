@@ -11,4 +11,16 @@ const getAllProducts = async () => {
   return data;
 };
 
-module.exports = { getAllProducts };
+const getProductById = async (id) => {
+  const { data, error } = await supabaseDB
+    .from("products")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
+};
+
+module.exports = { getAllProducts, getProductById };
