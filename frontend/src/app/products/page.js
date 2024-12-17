@@ -178,6 +178,7 @@ function ProductsPage() {
                 miniInfo={item.mini_info}
                 productDescription={item.product_description}
                 price={item.price}
+                id={item.id}
               />
             ))
           ) : (

@@ -5,24 +5,26 @@ function FeatureSection() {
     {
       imageSrc: "/01.plant.png",
       imageAlt: "plant",
-      title: "Heilpflanzen entdecken",
-      description: "Finde natürliche Lösungen für Deine Beschwerden.",
-      buttonText: "Mehr erfahren",
+      title: "Discover medicinal herbs",
+      description: "Browse through our herbary and explore natures remedies.",
+      buttonText: "Find out more",
+      path: "/herbarium",
     },
     {
       imageSrc: "/02.tea-ceremony.png",
       imageAlt: "tea",
-      title: "Produkte finden",
-      description: "Tees, Bäder und mehr mit Deinen Heilpflanzen.",
-      buttonText: "Mehr erfahren",
+      title: "Find your product",
+      description: "Teas, baths and more made of medicinal plants.",
+      buttonText: "Find out more",
+      path: "/products",
     },
     {
       imageSrc: "/03.open-book.png",
       imageAlt: "articles",
-      title: "Wissenswertes und Tipps",
-      description:
-        "Blog-Artikel und was Du über Naturheilkunde wissen solltest.",
-      buttonText: "Mehr erfahren",
+      title: "Interesting facts and tips",
+      description: "Blog articles and knowledge about natural medicine.",
+      buttonText: "Find out more",
+      path: "/blog",
     },
   ];
 
@@ -37,6 +39,7 @@ function FeatureSection() {
           title={feature.title}
           description={feature.description}
           buttonText={feature.buttonText}
+          linkPath={feature.path}
         />
       ))}
     </section>
