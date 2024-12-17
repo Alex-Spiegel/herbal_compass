@@ -1,106 +1,101 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import ProductCard from "@/_components/ProductCard";
-import SearchFieldBtn from "@/_components/SearchFieldBtn";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { get_all_plants } from "@/utils/api";
+import SearchResultPlantCard from "@/_components/SearchResultPlantCard";
 
 function SearchPage() {
-  const [query, setQuery] = useState(""); // query = aktueller Wert der Suchanfrage
-  const [results, setResults] = useState([]); // results = speichert die Ergebnisse der Suche, die vom Server kommen
-  const [loading, setLoading] = useState(false); // loading = Indikator, ob Suche noch läuft
   const searchParams = useSearchParams();
+  const router = useRouter();
 
+  const initialSymptom = searchParams.get("symptom") || ""; // Extract symptom from URL
+  const [symptom, setSymptom] = useState(initialSymptom);
+  const [plants, setPlants] = useState([]);
+  const [filteredPlants, setFilteredPlants] = useState([]); // die Matches, sozusagen
+  const [loading, setLoading] = useState(true);
+
+  // Fetch all plants wenn die Komponente gemounted wird
   useEffect(() => {
-    const type = searchParams.get("type");
-    setLoading(true);
+    get_all_plants()
+      .then((data) => {
+        setPlants(data);
+        setLoading(false);
 
-    const fetchData = async () => {
-      let API_URL;
+        // Filtere plants nach initial Symptom das wir aus den Params haben
+        if (initialSymptom) {
+          filterPlants(data, initialSymptom);
+        }
+      })
+      .catch((err) => console.error("Error fetching plants:", err));
+  }, []);
 
-      if (type === "herbs") {
-        API_URL = "http://localhost:5000/api/herbs";
-      } else {
-        API_URL = "http://localhost:5000/api/products";
-      }
+  // Funktion zum Filtern der Pflanzen basierend auf dem eingegebenen Symptom
+  const filterPlants = (allPlants, searchSymptom) => {
+    const matches = allPlants.filter((plant) =>
+      plant.usage.some((use) =>
+        use.toLowerCase().includes(searchSymptom.toLowerCase())
+      )
+    );
+    setFilteredPlants(matches);
+  };
 
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      setResults(data);
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [searchParams]);
+  // Handle Klich auf search button
+  const handleSearch = () => {
+    if (symptom.trim()) {
+      router.push(`/search?symptom=${encodeURIComponent(symptom.trim())}`);
+      filterPlants(plants, symptom);
+    }
+  };
 
   return (
-    <div>
-      {/* <h1 className="text-3xl font-bold">
-        {searchParams.get("type") === "herbs" ? "All HERBS" : "All PRODUCTS"}
-      </h1> */}
-      <div className="w-[80vw] px-14 mx-auto my-3 flex justify-evenly gap-3">
-        <button className="w-40 h-20 px-4 text-center bg-green-300 border-2 border-green-800 rounded-md">
-          Symptoms
-        </button>
-        <button className="w-40 h-20 px-4 text-center bg-green-300 border-2 border-green-800 rounded-md">
-          Herbs
-        </button>
-        <button className="w-40 h-20 px-4 text-center bg-green-300 border-2 border-green-800 rounded-md">
-          Products
-        </button>
-      </div>
-
-      {/* Suchfeld */}
-      <form className="w-[80vw] px-14 mx-auto my-3">
-        <SearchFieldBtn
-          placeholderText="Enter search term"
-          buttonText="Search"
-          onInputChange={(event) => setQuery(event.target.value)}
-          onButtonClick={() => {
-            const fetchData = async () => {
-              setLoading(true);
-              const API_URL =
-                searchParams.get("type") === "herbs"
-                  ? "http://localhost:5000/api/herbs"
-                  : "http://localhost:5000/api/products";
-
-              const response = await fetch(`${API_URL}?query=${query}`);
-              const data = await response.json();
-              setResults(data);
-              setLoading(false);
-            };
-            fetchData();
-          }}
+    <>
+      {/* Search Bar */}
+      <div className="my-6 flex justify-center gap-4">
+        <input
+          className="w-[650px] h-14 p-3 text-lg border border-gray-700 rounded-full"
+          type="text"
+          placeholder="Enter your symptom"
+          value={symptom}
+          onChange={(event) => setSymptom(event.target.value)}
         />
-      </form>
-
-      {/* SEARCH RESULTS */}
-      <div className="w-[80vw] px-14 mx-auto my-3">
-        <h2 className="text-3xl font-bold">Search Results</h2>
-        <p className="text-xs">63 Results</p>
+        <button
+          className="h-14 w-28 px-6 py-3 text-lg text-white bg-green-700 border border-gray-700 rounded-full font-semibold hover:bg-green-800"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
       </div>
 
-      {/* Ladeanzeige */}
-      {loading && <p>Loading...</p>}
-
-      {/* Ergebnisse anzeigen */}
-      <div className="flex flex-col gap-4">
-        {results.length !== 0 ? (
-          results.map((item) => (
-            <ProductCard
-              key={item.id}
-              id={item.id}
-              brand={item.brand}
-              productName={item.productName || item.name}
-              prod_description={item.prod_description}
-              productImage={item.image_url}
-            />
-          ))
-        ) : (
-          <p>No items available</p>
-        )}
-      </div>
-    </div>
+      {/* Ladeanzeige während Fetching */}
+      {loading ? (
+        <div className="text-center my-6">
+          <p className="text-5xl font-semibold italic">
+            Loading search results...
+          </p>
+        </div>
+      ) : (
+        // ResultCards werden erst nach dem Laden angezeigt
+        <div className="my-6 grid grid-cols-1 gap-6">
+          {filteredPlants.length > 0 ? (
+            filteredPlants.map((plant) => (
+              <SearchResultPlantCard
+                key={plant.id}
+                plantImage={plant.plant_image_url}
+                plantName={plant.plant_name}
+                latinName={plant.latin_name}
+                id={plant.id}
+              />
+            ))
+          ) : (
+            // No results
+            <p className="text-center text-xl text-gray-700">
+              No plants found for "{symptom}".
+            </p>
+          )}
+        </div>
+      )}
+    </>
   );
 }
 

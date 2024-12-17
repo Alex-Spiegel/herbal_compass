@@ -237,6 +237,7 @@ function HerbariumPage() {
                   activeIngredient={item.active_ingredients}
                   usage={item.usage}
                   herbDescription={item.herb_description}
+                  id={item.id}
                 />
               );
             })
