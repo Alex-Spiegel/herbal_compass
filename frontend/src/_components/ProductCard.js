@@ -34,7 +34,7 @@ function ProductCard({
             href={`/products/${id}`}
             className="px-4 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700 transition duration-200"
           >
-            Show more...
+            Show more &#187;
           </Link>
           {/* price */}
           <p className="text-lg font-semibold text-gray-800">{price} €</p>

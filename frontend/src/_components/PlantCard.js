@@ -45,7 +45,7 @@ function PlantCard({
             href={`/herbarium/${id}`} // Anpassung für Navigation
             className="px-4 py-2 font-bold text-white bg-green-700 rounded-md hover:bg-green-800 transition duration-200"
           >
-            Learn more
+            Learn more &#187;
           </Link>
         </div>
       </div>
