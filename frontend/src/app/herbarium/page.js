@@ -1,6 +1,6 @@
 "use client";
 
-import { get_all_plants } from "@/utils/api";
+import { get_all_plants } from "../../utils/api";
 import { useEffect, useState } from "react";
 import Dropdown from "@/_components/Dropdown";
 import PlantCard from "@/_components/PlantCard";

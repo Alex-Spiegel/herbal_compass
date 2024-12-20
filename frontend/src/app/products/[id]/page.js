@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { get_product_by_id } from "@/utils/api"; // API-Funktion zum Abrufen des Produkts
+import { get_product_by_id } from "../../../utils/api"; // API-Funktion zum Abrufen des Produkts
 
 function ProductDetailsPage() {
   const { id } = useParams(); // ID aus der URL extrahieren

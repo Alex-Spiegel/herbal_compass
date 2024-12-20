@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { get_plant_by_id } from "@/utils/api";
+import { get_plant_by_id } from "../../../utils/api";
 
 function PlantDetailsPage() {
   const { id } = useParams(); // ID aus der URL

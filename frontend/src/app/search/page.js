@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { get_all_plants } from "@/utils/api";
+import { get_all_plants } from "../../utils/api";
 import SearchResultPlantCard from "@/_components/SearchResultPlantCard";
 
 function SearchPage() {
@@ -10,7 +10,7 @@ function SearchPage() {
   const router = useRouter();
 
   const initialSymptom = searchParams.get("symptom") || ""; // Extract symptom from URL
-  const [symptom, setSymptom] = useState(initialSymptom);
+  const [symptom, setSymptom] = useState(initialSymptom || "");
   const [plants, setPlants] = useState([]);
   const [filteredPlants, setFilteredPlants] = useState([]); // die Matches, sozusagen
   const [loading, setLoading] = useState(true);
@@ -30,17 +30,22 @@ function SearchPage() {
       .catch((err) => console.error("Error fetching plants:", err));
   }, []);
 
-  // Funktion zum Filtern der Pflanzen basierend auf dem eingegebenen Symptom
+  // Funktion zum Filtern der Pflanzen basierend auf dem eingegebenen Symptom oder usage
   const filterPlants = (allPlants, searchSymptom) => {
-    const matches = allPlants.filter((plant) =>
-      plant.usage.some((use) =>
-        use.toLowerCase().includes(searchSymptom.toLowerCase())
-      )
-    );
+    const matches = allPlants.filter((plant) => {
+      return (
+        plant.usage.some((use) =>
+          use.toLowerCase().includes(searchSymptom.toLowerCase())
+        ) ||
+        plant.symptoms.some((symptom) =>
+          symptom.toLowerCase().includes(searchSymptom.toLowerCase())
+        )
+      );
+    });
     setFilteredPlants(matches);
   };
 
-  // Handle Klich auf search button
+  // Handle Klick auf search button
   const handleSearch = () => {
     if (symptom.trim()) {
       router.push(`/search?symptom=${encodeURIComponent(symptom.trim())}`);
@@ -84,6 +89,7 @@ function SearchPage() {
                 plantImage={plant.plant_image_url}
                 plantName={plant.plant_name}
                 latinName={plant.latin_name}
+                usage={plant.usage}
                 id={plant.id}
               />
             ))

@@ -1,6 +1,6 @@
 "use client";
 
-import { get_all_products } from "@/utils/api";
+import { get_all_products } from "../../utils/api";
 import { useEffect, useState } from "react";
 import ProductCard from "@/_components/ProductCard";
 import Dropdown from "@/_components/Dropdown";
@@ -127,14 +127,14 @@ function ProductsPage() {
         <div className="flex gap-6">
           <Dropdown
             buttonLabel="Product Type"
-            filterOptions={["All", "Tablets", "Tea", "Bath"]}
+            filterOptions={["- All -", "Tablets", "Tea", "Bath"]}
             onFilterSelect={(filterValue) =>
               handleFilterSelect(filterValue, "type")
             }
           />
           <Dropdown
             buttonLabel="Market"
-            filterOptions={["All", "REWE", "EDEKA", "ALDI", "DM"]}
+            filterOptions={["- All -", "REWE", "EDEKA", "ALDI", "DM"]}
             onFilterSelect={(filterValue) =>
               handleFilterSelect(filterValue, "market")
             }
@@ -142,7 +142,7 @@ function ProductsPage() {
           <Dropdown
             buttonLabel="Ingredient"
             filterOptions={[
-              "All",
+              "- All -",
               "Chamomile",
               "Eucalyptus",
               "Fennel",

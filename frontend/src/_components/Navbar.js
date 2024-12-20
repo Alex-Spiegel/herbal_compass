@@ -1,11 +1,44 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
 
 function Navbar() {
+  const pathname = usePathname();
+  const supabase = createClient();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check if the user is logged in
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      setIsLoggedIn(!!session); // User ist eingeloggt, wenn Session existiert
+    };
+
+    checkSession();
+
+    // Listener für Auth-Änderungen hinzufügen
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setIsLoggedIn(!!session);
+      }
+    );
+
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, [supabase]);
+
   return (
     // NAV CONTAINER
     <nav
-      className="max-w-[1200px] h-[15vh] px-14 mx-auto grid grid-cols-3 items-center text-white text-lg"
+      className="max-w-[1200px] h-[15vh] px-14 mx-auto grid grid-cols-3 items-center text-lg text-white"
       style={{ gridTemplateColumns: "1fr 2fr 1fr" }}
     >
       {/* LEFT CONTAINER */}
@@ -35,12 +68,46 @@ function Navbar() {
 
       {/* RIGHT CONTAINER */}
       <div className="flex justify-end items-center gap-2">
-        <button className="w-20 px-4 py-1.5 text-sm text-white bg-green-700 border border-gray-800 rounded-full hover:bg-green-800">
-          Signup
-        </button>
-        <button className="w-20 px-4 py-1.5 text-sm text-green-900 bg-green-500 border border-gray-800 rounded-full hover:bg-green-500">
-          Login
-        </button>
+        {/* Wenn der User eingeloggt ist, Logout-Button und Account-Link anzeigen */}
+        {isLoggedIn ? (
+          <>
+            <Link
+              href="/account"
+              className="px-6 py-1.5 text-sm font-bold text-black bg-lime-200 border border-gray-800 rounded-full hover:bg-lime-300"
+            >
+              Account
+            </Link>
+            <button
+              onClick={async () => {
+                await supabase.auth.signOut();
+              }}
+              className="px-6 py-1.5 text-sm font-bold text-black bg-green-400 border border-gray-800 rounded-full hover:bg-green-500"
+            >
+              Sign out
+            </button>
+          </>
+        ) : (
+          <>
+            {/* Signup-Button nur anzeigen, wenn NICHT auf /signup */}
+            {pathname !== "/signup" && (
+              <Link
+                href="/signup"
+                className="px-6 py-2 text-white bg-green-700 border border-gray-800 rounded-full hover:bg-green-800"
+              >
+                Sign up
+              </Link>
+            )}
+            {/* Login-Button nur anzeigen, wenn NICHT auf /login */}
+            {pathname !== "/login" && (
+              <Link
+                href="/login"
+                className="px-6 py-2 text-green-900 bg-green-500 border border-gray-800 rounded-full hover:bg-green-500"
+              >
+                Log in
+              </Link>
+            )}
+          </>
+        )}
       </div>
     </nav>
   );
