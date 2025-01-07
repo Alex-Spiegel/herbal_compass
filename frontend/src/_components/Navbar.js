@@ -5,11 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 function Navbar() {
   const pathname = usePathname();
   const supabase = createClient();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter(); // Initialisiere useRouter
 
   // Check if the user is logged in
   useEffect(() => {
@@ -80,8 +82,9 @@ function Navbar() {
             <button
               onClick={async () => {
                 await supabase.auth.signOut();
+                router.push("/"); // Redirect nach dem Logout zur Startseite
               }}
-              className="px-6 py-1.5 text-sm font-bold text-black bg-green-400 border border-gray-800 rounded-full hover:bg-green-500"
+              className="px-6 py-1.5 text-sm font-bold text-black bg-orange-300 border border-gray-800 rounded-full hover:bg-orange-400"
             >
               Sign out
             </button>
@@ -92,7 +95,7 @@ function Navbar() {
             {pathname !== "/signup" && (
               <Link
                 href="/signup"
-                className="px-6 py-2 text-white bg-green-700 border border-gray-800 rounded-full hover:bg-green-800"
+                className="px-6 py-1.5 text-sm font-bold text-white bg-green-700 border border-gray-800 rounded-full hover:bg-green-800"
               >
                 Sign up
               </Link>
@@ -101,7 +104,7 @@ function Navbar() {
             {pathname !== "/login" && (
               <Link
                 href="/login"
-                className="px-6 py-2 text-green-900 bg-green-500 border border-gray-800 rounded-full hover:bg-green-500"
+                className="px-6 py-1.5 text-sm font-bold text-green-900 bg-green-500 border border-gray-800 rounded-full hover:bg-green-500"
               >
                 Log in
               </Link>

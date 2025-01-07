@@ -1,6 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 
+// updateSession-Funktion: initialisiert einen Server-Client (mit meinen env-files) + some Cookie-Logik
+
 export async function updateSession(request) {
   let supabaseResponse = NextResponse.next({
     request,
@@ -29,7 +31,7 @@ export async function updateSession(request) {
     }
   );
 
-  // refreshing the auth token
+  // Diese func wird genutzt, um den JWT zu validieren & aktualisieren
   await supabase.auth.getUser();
 
   return supabaseResponse;

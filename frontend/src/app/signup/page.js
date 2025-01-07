@@ -6,7 +6,7 @@ export default function SignupPage() {
     <div className="flex h-[83vh]">
       {/* Linke Hälfte */}
       <div
-        className="relative w-1/2 bg-cover bg-center"
+        className="relative w-1/2 bg-cover bg-center rounded-r-2xl"
         style={{
           backgroundImage: "url('pexels-photo-8115976.jpg')",
         }}
@@ -24,7 +24,7 @@ export default function SignupPage() {
 
       {/* Rechte Hälfte */}
       <div className="w-1/2 flex items-center justify-center">
-        <div className="w-3/4 max-w-md p-8  bg-lime-100 rounded-lg shadow-lg">
+        <div className="w-3/4 max-w-md p-8  bg-lime-100 rounded-2xl shadow-lg">
           <h2 className="text-3xl font-bold text-center">
             Create a New Account!
           </h2>
