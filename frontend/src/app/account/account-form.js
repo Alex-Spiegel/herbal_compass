@@ -63,13 +63,12 @@ export default function AccountForm({ user }) {
 
   return (
     <div className="min-h-[80vh] flex justify-start">
-      {/* Sidebar */}
+      {/* SIDEBAR */}
       <div className="w-80 p-6 bg-lime-100 flex flex-col justify-start gap-2 rounded-r-2xl shadow-lg">
         {/* Avatar mittig */}
         <div className="flex justify-center mb-2">
           <div className="w-24 h-24 rounded-full border-4 border-green-600 overflow-hidden shadow-xl">
             <img
-              // src={`/${plantImage}`}
               src={avatar_url}
               alt="avatar"
               className="w-full h-full  first-line:object-cover"
@@ -123,7 +122,7 @@ export default function AccountForm({ user }) {
             {loading ? "Loading ..." : "Update"}
           </button>
           <form action="/auth/signout" method="post" className="mt-4">
-            <button className="w-full px-6 py-2 font-bold text-red bg-green-400 border border-gray-800 rounded-full hover:bg-green-500">
+            <button className="w-full px-6 py-2 font-bold text-red bg-orange-300 border border-gray-800 rounded-full hover:bg-orange-400">
               Sign out
             </button>
           </form>

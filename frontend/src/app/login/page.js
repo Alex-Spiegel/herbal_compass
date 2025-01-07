@@ -6,7 +6,7 @@ export default function LoginPage() {
     <div className="flex h-[83vh]">
       {/* Linke Hälfte */}
       <div
-        className="relative w-1/2 bg-cover bg-center"
+        className="relative w-1/2 bg-cover bg-center rounded-r-2xl"
         style={{
           backgroundImage: "url('pexels-photo-1702949.webp')",
         }}
@@ -24,7 +24,7 @@ export default function LoginPage() {
 
       {/* Rechte Hälfte */}
       <div className="w-1/2 flex items-center justify-center">
-        <div className="w-3/4 max-w-md p-8  bg-lime-100 rounded-lg shadow-lg">
+        <div className="w-3/4 max-w-md p-8  bg-lime-100 rounded-2xl shadow-lg">
           <h2 className="text-3xl font-bold text-center">Welcome back!</h2>
           <form className="flex flex-col space-y-6">
             <div>

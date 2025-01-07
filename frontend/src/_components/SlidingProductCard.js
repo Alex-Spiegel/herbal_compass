@@ -40,7 +40,7 @@ function SlidingProductCard({ plantName }) {
                 <img
                   src={`/products/${product.image_url}`}
                   alt={product.product_name}
-                  className="h-[150px] object-cover"
+                  className="h-[150px] object-contain"
                 />
                 <h3 className="mt-2 text-sm font-bold text-gray-700">
                   {product.product_name}

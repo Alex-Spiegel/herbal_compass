@@ -1,47 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { useGlobalState } from "@/context/GlobalState";
 import Link from "next/link";
 
 function Dashboard() {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const supabase = createClient();
-
-  useEffect(() => {
-    const checkIfAdmin = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (session) {
-        const { user } = session;
-
-        // Prüfen, ob der Benutzer die Rolle 'admin' hat
-        if (user?.role === "admin") {
-          setIsAdmin(true);
-        }
-      }
-    };
-
-    checkIfAdmin();
-
-    // Optional: Hörer für Auth-Statusänderung
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        if (session) {
-          const { user } = session;
-          setIsAdmin(user?.role === "admin");
-        } else {
-          setIsAdmin(false); // Wenn der Benutzer abgemeldet ist
-        }
-      }
-    );
-
-    return () => {
-      listener?.subscription.unsubscribe();
-    };
-  }, [supabase]);
+  const { isAdmin } = useGlobalState(); // Den Admin-Status aus dem Context verwenden
 
   return (
     <div>
