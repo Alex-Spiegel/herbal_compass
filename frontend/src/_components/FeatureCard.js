@@ -11,9 +11,14 @@ function FeatureCard({
   onButtonClick,
 }) {
   return (
-    <div className="w-72 min-w-56 h-[400px] p-6 flex flex-col justify-between gap-2 rounded-lg bg-lime-200">
+    <div
+      style={{
+        boxShadow: "0 0 20px rgba(0, 0, 0, 0.5)",
+      }}
+      className="max-w-80 min-w-56 h-[400px] p-6 flex flex-col justify-between gap-2 rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl bg-lime-300"
+    >
       <Image src={imageSrc} alt={imageAlt} width={120} height={120} />
-      <h2 className="text-2xl font-semibold">{title}</h2>
+      <h3 className="text-2xl font-semibold">{title}</h3>
       <p className="font-semibold text-gray-600">{description}</p>
       <Link
         href={linkPath}

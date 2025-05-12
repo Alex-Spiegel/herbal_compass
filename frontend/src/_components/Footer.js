@@ -1,99 +1,62 @@
 import Link from "next/link";
 import Image from "next/image";
+import Container80 from "./Container80";
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagramSquare,
+  FaYoutube,
+  FaLinkedin,
+} from "react-icons/fa";
+import { FaPhoneVolume } from "react-icons/fa6";
+import { MdOutlineEmail } from "react-icons/md";
 
 function Footer() {
   return (
-    <footer>
-      <div className="px-14 text-white bg-lime-700 rounded-t-2xl">
+    <footer className="mt-20 bg-mygreen rounded-t-3xl text-white">
+      <Container80>
         {/* TOP PART */}
-        <div className="flex  py-6">
-          {/* LEFT DIV */}
-          <div className="w-[40%] flex justify-center items-center">
-            <Image
-              src="/logo.png"
-              alt="logo"
-              width={100}
-              height={100}
-            />
+        <div className="flex py-4 gap-6">
+          {/* LEFT */}
+          <div className="w-[40%] flex flex-col items-center">
+            <h2 className="text-3xl font-bold">HERBAL COMPASS</h2>
+            <Image src="/logo.png" alt="logo" width={100} height={100} />
           </div>
 
-          {/* RIGHT DIV */}
-          <div className="w-[60%] flex flex-col gap-2 px-16">
-            <h2 className="text-4xl mb-5">HERBAL COMPASS</h2>
-            <div className="flex justify-between">
-              {/* LINK BLOCK 01 */}
+          {/* RIGHT */}
+          <div className="w-[60%] flex flex-col gap-4 px-0">
+            <div className="flex flex-wrap justify-between gap-6">
+              {/* BLOCK 01 */}
               <div>
                 <h3 className="pb-3 font-bold">About Us</h3>
-                <ul className="text-xs">
-                  <li>
-                    <Link
-                      href="/about/mission"
-                      className="hover:underline"
-                    >
-                      Mission
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/about/team"
-                      className="hover:underline"
-                    >
-                      Team
-                    </Link>
-                  </li>
+                <ul className="text-xs flex flex-col gap-1">
+                  <li>Mission</li>
+                  <li>Team</li>
+                  <li>Our Values</li>
+                  <li>Partnerships</li>
                 </ul>
               </div>
 
-              {/* LINK BLOCK 02 */}
+              {/* BLOCK 02 */}
               <div>
                 <h3 className="pb-3 font-bold">Support</h3>
-                <ul className="text-xs">
-                  <li>
-                    <Link
-                      href="/contact"
-                      className="hover:underline"
-                    >
-                      Contact
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/faq"
-                      className="hover:underline"
-                    >
-                      FAQ
-                    </Link>
-                  </li>
+                <ul className="text-xs flex flex-col gap-1">
+                  <li>Contact</li>
+                  <li>FAQ</li>
+                  <li>Shipping & Returns</li>
+                  <li>How it Works</li>
                 </ul>
               </div>
 
-              {/* LINK BLOCK 03 */}
+              {/* BLOCK 03 */}
               <div>
-                <h3 className="pb-3 font-bold">Social</h3>
-                <ul className="text-xs">
-                  <li>
-                    <Link
-                      href="https://www.instagram.com/herbal-compass"
-                      className="hover:underline"
-                    >
-                      Instagram
-                    </Link>
+                <h3 className="pb-3 font-bold">Contact Us</h3>
+                <ul className="flex flex-col gap-2 text-xs">
+                  <li className="flex items-center gap-2">
+                    <FaPhoneVolume /> +49 72505 5378
                   </li>
-                  <li>
-                    <Link
-                      href="https://www.facebook.com/herbalcompass"
-                      className="hover:underline"
-                    >
-                      Facebook
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="https://x.com/herbalcompassnews"
-                      className="hover:underline"
-                    >
-                      X
-                    </Link>
+                  <li className="flex items-center gap-2">
+                    <MdOutlineEmail /> info@herbalcompass.com
                   </li>
                 </ul>
               </div>
@@ -102,27 +65,35 @@ function Footer() {
         </div>
 
         {/* BOTTOM PART */}
-        <div className="h-14 flex justify-between items-center text-xs border-t border-white">
-          <Link
-            href="/legal/copyright"
-            className="hover:underline"
-          >
-            Copright &#169; 2024 Herbal Compass
-          </Link>
-          <Link
-            href="/legal/terms"
-            className="hover:underline"
-          >
-            Terms of Service
-          </Link>
-          <Link
-            href="/legal/privacy-policy"
-            className="hover:underline"
-          >
-            Privacy Policy
-          </Link>
+        <div className="border-t border-white py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs">
+          {/* SOCIALS LEFT */}
+          <div>
+            <p className="font-semibold mb-1">FOLLOW US</p>
+            <div className="flex gap-3 text-xl">
+              <FaFacebook />
+              <FaTwitter />
+              <FaInstagramSquare />
+              <FaYoutube />
+              <FaLinkedin />
+            </div>
+          </div>
+
+          {/* LEGAL LINKS RIGHT */}
+          <div className="mt-4 sm:mt-0 sm:text-right">
+            <span className="hover:underline">
+              <Link href="/legal/copyright">© 2024 Herbal Compass</Link>
+            </span>
+            <span className="mx-2">|</span>
+            <span className="hover:underline">
+              <Link href="/legal/terms">Terms of Service</Link>
+            </span>
+            <span className="mx-2">|</span>
+            <span className="hover:underline">
+              <Link href="/legal/privacy-policy">Privacy Policy</Link>
+            </span>
+          </div>
         </div>
-      </div>
+      </Container80>
     </footer>
   );
 }

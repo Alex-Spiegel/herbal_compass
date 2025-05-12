@@ -1,100 +1,78 @@
+import BlogCard from "./BlogCard";
+import { FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
+
 function BlogTeaserSection() {
+  const blogArticles = [
+    {
+      imageSrc: "/plants/01_pexels-photo-2339013.webp",
+      imageAlt: "Chamomile",
+      herbName: "Chamomile",
+      title: "The Calming Power of Chamomile",
+      teaserText:
+        "Discover how chamomile can help reduce stress, support sleep, and soothe digestion—naturally and gently.",
+      author: "Sophie Lane",
+      authorImageSrc: "https://randomuser.me/api/portraits/women/21.jpg",
+    },
+    {
+      imageSrc: "/plants/05_Eucalyptus-obliqua-Messmate-Kings-Flat-001-1.jpg",
+      imageAlt: "Eucalyptus",
+      herbName: "Eucalyptus",
+      title: "Breathe Easy with Eucalyptus",
+      teaserText:
+        "From cold relief to skin care, eucalyptus offers powerful benefits you can bring into your daily routine.",
+      author: "Marcus Hale",
+      authorImageSrc: "https://randomuser.me/api/portraits/men/21.jpg",
+    },
+    {
+      imageSrc: "/plants/07_Thyme-in-an-open-land-garden.jpg",
+      imageAlt: "Thyme",
+      herbName: "Thyme",
+      title: "Thyme: Small Herb, Big Impact",
+      teaserText:
+        "Packed with antioxidants and antimicrobial properties, thyme is a natural go-to for health and flavor.",
+      author: "Elena Brooks",
+      authorImageSrc: "https://randomuser.me/api/portraits/women/2.jpg",
+    },
+  ];
+
   return (
-    <section className="py-12 border-2 border-black">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Teaser 1 */}
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <div className="bg-blue-500 h-48 rounded-tl-lg rounded-tr-lg">
-            <img
-              src="https://via.placeholder.com/400x225/blue"
-              alt="Teaser Bild 1"
-              className="w-full h-full object-cover rounded-tl-lg rounded-tr-lg"
-            />
-          </div>
-          <div className="mt-4">
-            <p className="text-sm text-gray-500 font-semibold tracking-wide uppercase">
-              KAMILLENBLÜTEN
-            </p>
-            <h3 className="text-xl font-bold mt-2">
-              Der Klassiker unter den Heilpflanzen
-            </h3>
-            <p className="text-gray-700 mt-2 text-sm">
-              Kamille ist eine der bekanntesten Heilpflanzen. Sie wird für ihre
-              beruhigende Wirkung bei Magen-Darm-Beschwerden und als Tee
-              genutzt.
-            </p>
-          </div>
-          <div className="flex justify-between items-center mt-4">
-            <p className="text-xs text-gray-500">Von Max Mustermann</p>
-            <img
-              src="https://via.placeholder.com/30"
-              alt="Max Mustermann"
-              className="rounded-full h-8 w-8"
-            />
-          </div>
+    <section className="mt-20">
+      <div className="flex flex-wrap justify-between items-center gap-4">
+        <div className="max-w-3xl">
+          {/* text */}
+          <h2 className="text-3xl font-bold text-green-800">
+            Stories from the World of Herbs
+          </h2>
+          <p>
+            Have a look at our blog, containing curated articles for the
+            naturally curious. Discover tips, remedies, and stories rooted in
+            herbal wisdom.
+          </p>
         </div>
-
-        {/* Teaser 2 */}
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <div className="bg-red-500 h-48 rounded-tl-lg rounded-tr-lg">
-            <img
-              src="https://via.placeholder.com/400x225/red"
-              alt="Teaser Bild 2"
-              className="w-full h-full object-cover rounded-tl-lg rounded-tr-lg"
-            />
-          </div>
-          <div className="mt-4">
-            <p className="text-sm text-gray-500 font-semibold tracking-wide uppercase">
-              BÄLDERWURZEL
-            </p>
-            <h3 className="text-xl font-bold mt-2">
-              Beruhigung für den Körper und Geist
-            </h3>
-            <p className="text-gray-700 mt-2 text-sm">
-              Baldrianwurzel ist bekannt für ihre entspannende Wirkung. Sie wird
-              bei Schlafproblemen und innerer Unruhe eingesetzt.
-            </p>
-          </div>
-          <div className="flex justify-between items-center mt-4">
-            <p className="text-xs text-gray-500">Von Julia Meier</p>
-            <img
-              src="https://via.placeholder.com/30"
-              alt="Julia Meier"
-              className="rounded-full h-8 w-8"
-            />
-          </div>
+        <div className="shrink-0">
+          {/* button */}
+          <Link
+            href="/blog"
+            className="flex items-center gap-2 p-3 font-bold text-white bg-green-800 rounded-full hover:bg-green-950"
+          >
+            VIEW ALL <FaChevronRight />
+          </Link>
         </div>
-
-        {/* Teaser 3 */}
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <div className="bg-green-500 h-48 rounded-tl-lg rounded-tr-lg">
-            <img
-              src="https://via.placeholder.com/400x225/green"
-              alt="Teaser Bild 3"
-              className="w-full h-full object-cover rounded-tl-lg rounded-tr-lg"
-            />
-          </div>
-          <div className="mt-4">
-            <p className="text-sm text-gray-500 font-semibold tracking-wide uppercase">
-              LAVENDEL
-            </p>
-            <h3 className="text-xl font-bold mt-2">
-              Entspannung für Körper und Seele
-            </h3>
-            <p className="text-gray-700 mt-2 text-sm">
-              Lavendel ist ein hervorragendes Mittel zur Beruhigung und wird oft
-              für Bäder oder Tees verwendet, um Stress abzubauen.
-            </p>
-          </div>
-          <div className="flex justify-between items-center mt-4">
-            <p className="text-xs text-gray-500">Von Anna Schmidt</p>
-            <img
-              src="https://via.placeholder.com/30"
-              alt="Anna Schmidt"
-              className="rounded-full h-8 w-8"
-            />
-          </div>
-        </div>
+      </div>
+      <div className="flex flex-wrap justify-between gap-6 py-5">
+        {blogArticles.map((article, index) => (
+          <BlogCard
+            key={index}
+            imageSrc={article.imageSrc}
+            imageAlt={article.imageAlt}
+            herbName={article.herbName}
+            title={article.title}
+            teaserText={article.teaserText}
+            author={article.author}
+            authorImageSrc={article.authorImageSrc}
+          />
+        ))}
       </div>
     </section>
   );

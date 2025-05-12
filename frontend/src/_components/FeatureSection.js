@@ -28,20 +28,24 @@ function FeatureSection() {
     },
   ];
 
-  // Darunter: Nochmal einlesen in map()-Methode, index & key & react, spread-operator syntax
   return (
-    <section className="max-w-5xl mx-auto px-14 py-12 flex flex-wrap justify-around gap-6">
-      {features.map((feature, index) => (
-        <FeatureCard
-          key={index}
-          imageSrc={feature.imageSrc}
-          imageAlt={feature.imageAlt}
-          title={feature.title}
-          description={feature.description}
-          buttonText={feature.buttonText}
-          linkPath={feature.path}
-        />
-      ))}
+    <section className="mt-20">
+      <h2 className="text-3xl font-bold text-green-800">
+        What's Waiting for You
+      </h2>
+      <div className="flex flex-wrap justify-between gap-6 py-5">
+        {features.map((feature, index) => (
+          <FeatureCard
+            key={index}
+            imageSrc={feature.imageSrc}
+            imageAlt={feature.imageAlt}
+            title={feature.title}
+            description={feature.description}
+            buttonText={feature.buttonText}
+            linkPath={feature.path}
+          />
+        ))}
+      </div>
     </section>
   );
 }
